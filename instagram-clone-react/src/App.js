@@ -14,6 +14,8 @@ function App() {
       </div>
       <h1> Everybody is Welcome</h1>
 
+      <Post username="Wainhouse" imageUrl="https://www.freecodecamp.org/news/content/images/size/w600/2021/06/Ekran-Resmi-2019-11-18-18.08.13.png" />
+      <Post />
       <Post />
       {/* /Post/ */}
       {/* /Post/ */}
