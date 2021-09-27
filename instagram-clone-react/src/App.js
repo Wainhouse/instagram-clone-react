@@ -12,7 +12,10 @@ function App() {
     //this is where the code runs
     db.collection('posts').onSnapshot(snapshot => {
       //everytime a new post is added, this code will fire
-      setPosts(snapshot.docs.map(doc => doc.data()));
+      setPosts(snapshot.docs.map(doc => ({
+        id: doc.id,
+        post: doc.data()
+      })));
     })
   }, []);
 
@@ -25,11 +28,12 @@ function App() {
           alt=""
         />
       </div>
+
       <h1>Everybody is Welcome</h1>
 
       {
-        posts.map(post => (
-          <Post username={post.username} caption={post.caption} imageUrl={post.imageUrl} />
+        posts.map(({ id, post }) => (
+          <Post key={id} username={post.username} caption={post.caption} imageUrl={post.imageUrl} />
 
         ))
       }
