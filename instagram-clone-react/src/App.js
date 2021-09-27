@@ -3,17 +3,17 @@ import './App.css';
 import Post from './Post.js'
 
 function App() {
-  const [post, setPosts] = useState([
+  const [posts, setPosts] = useState([
     {
       username: "Wainhouse",
       caption: "Wadup",
-      imageUrl: "https://www.freecodecamp.org/news/content/images/size/w600/2021/06/Ekran-Resmi-2019-11-18-18.08.13.png,
+      imageUrl: "https://www.freecodecamp.org/news/content/images/size/w600/2021/06/Ekran-Resmi-2019-11-18-18.08.13.png"
     },
     {
       username: "Wainhouse",
-      caption="Wadup",
-      imageUrl="https://www.freecodecamp.org/news/content/images/size/w600/2021/06/Ekran-Resmi-2019-11-18-18.08.13.png,
-    }
+      caption: "Wadup",
+      imageUrl: "https://img.webmd.com/dtmcms/live/webmd/consumer_assets/site_images/article_thumbnails/other/cat_relaxing_on_patio_other/1800x1200_cat_relaxing_on_patio_other.jpg"
+    },
   ]);
 
   return (
@@ -28,7 +28,7 @@ function App() {
       <h1>Everybody is Welcome</h1>
 
       {
-        post.map(post => (
+        posts.map(post => (
           <Post username={post.username} caption={post.caption} imageUrl={post.imageUrl} />
 
         ))
