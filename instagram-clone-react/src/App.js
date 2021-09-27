@@ -23,10 +23,9 @@ function App() {
     //this is where the code runs
     db.collection('posts').onSnapshot(snapshot)
     //everytime a new post is added, this code will fire
-    return () => {
-      cleanup
-    }
-  }, [posts])
+    setPosts(snapshot.docs.map(doc => doc.data()));
+
+  }, []);
 
   return (
     <div className="app">
