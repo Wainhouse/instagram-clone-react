@@ -8,6 +8,7 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { Input } from '@mui/material';
 import spam from './Images/Spamgramlogo.jpg';
+import ImageUpload from './ImageUpload';
 
 const style = {
   position: 'aboslute',
@@ -86,6 +87,11 @@ function App() {
 
   return (
     <div className="app">
+
+      <ImageUpload />
+
+
+
       <Modal
         open={open}
         onClose={() => setOpen(false)}
