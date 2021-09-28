@@ -98,16 +98,13 @@ function App() {
       </div>
       <Button onClick={() => setOpen(true)}>Sign Up</Button>
       <h1>Everybody is Welcome</h1>
-
+      {/* /Post/ */}
       {
         posts.map(({ id, post }) => (
           <Post key={id} username={post.username} caption={post.caption} imageUrl={post.imageUrl} />
 
         ))
       }
-
-      {/* /Post/ */}
-      {/* /Post/ */}
     </div>
   );
 }
