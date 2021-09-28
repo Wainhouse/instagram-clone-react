@@ -24,6 +24,7 @@ const style = {
 function App() {
   const [posts, setPosts] = useState([]);
   const [open, setOpen] = useState(false);
+  const [openSignin, setOpenSignIn] = useState(false);
   const [username, setUsername] = useState([]);
   const [email, setEmail] = useState([]);
   const [password, setPassword] = useState([]);
@@ -68,7 +69,19 @@ function App() {
           displayName: username
         })
       })
+      .catch((error) => alert(error.message));
+
+    setOpen(false);
+  }
+
+  const signIn = (event) => {
+    event.preventDefault();
+
+    auth
+      .signInWithEmailAndPassword(email, password)
       .catch((error) => alert(error.message))
+
+    setOpenSignIn(false);
   }
 
   return (
@@ -119,6 +132,47 @@ function App() {
         </Box>
 
       </Modal>
+      <Modal
+        open={openSignin}
+        onClose={() => setOpenSignIn(false)}
+      >
+        <Box sx={style}>
+          <div>
+            <form className="sign-in-box">
+              <center>
+                <img
+                  className="box-header-image"
+                  src={spam}
+                  alt=""
+                />
+              </center>
+              <Input
+                placeholder="email"
+                type="text"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+              <Input
+                placeholder="password"
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+              <Button type="submit" onClick={signIn}>Sign In</Button>
+            </form>
+
+
+          </div>
+          <Typography id="modal-modal-title" variant="h6" component="h2">
+
+          </Typography>
+          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+            Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
+          </Typography>
+        </Box>
+
+      </Modal>
+
       <div className="app__header">
         <img
           className="app__header-image"
@@ -126,9 +180,16 @@ function App() {
           alt=""
         />
       </div>
-      <Button onClick={() => setOpen(true)}>Sign Up</Button>
+
+      {user ? (
+        <Button onClick={() => auth.signOut()}> Logout</Button>
+      ) : (
+        <div className="login-container">
+          <Button onClick={() => setOpenSignIn(true)}>Sign In</Button>
+          <Button onClick={() => setOpen(true)}>Sign Up</Button>
+        </div>
+      )}
       <h1>Everybody is Welcome</h1>
-      {/* /Post/ */}
       {
         posts.map(({ id, post }) => (
           <Post key={id} username={post.username} caption={post.caption} imageUrl={post.imageUrl} />
