@@ -6,7 +6,6 @@ import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import { positions } from '@mui/system';
 import { Input } from '@mui/material';
 import spam from './Images/Spamgramlogo.jpg';
 
@@ -31,27 +30,21 @@ function App() {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
-    auth.onAuthStateChanged((authUser) => {
+    const unsubscribe = auth.onAuthStateChanged((authUser) => {
       if (authUser) {
         // user has logged in...
         console.log(authUser);
         setUser(authUser);
-
-        if (authUser.displayName) {
-          // don't update username
-        } else {
-          //if I just created someone
-          return authUser.updateProfile({
-            displayName: username,
-          });
-        }
-
       } else {
         //user has logged out...
         setUser(null);
       }
     })
-  }, []);
+    return () => {
+      //perform some cleanup actions
+      unsubscribe();
+    }
+  }, [user, username]);
 
   // useEffect -> Runs a piece of code based on a specific condition
   useEffect(() => {
@@ -68,7 +61,13 @@ function App() {
   const signUp = (event) => {
     event.preventDefault();
 
-    auth.createUserWithEmailAndPassword(email, password)
+    auth
+      .createUserWithEmailAndPassword(email, password)
+      .then((authUser) => {
+        return authUser.user.updateProfile({
+          displayName: username
+        })
+      })
       .catch((error) => alert(error.message))
   }
 
