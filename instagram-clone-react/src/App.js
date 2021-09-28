@@ -8,6 +8,7 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { positions } from '@mui/system';
 import { Input } from '@mui/material';
+import spam from './Images/Spamgramlogo.jpg';
 
 const style = {
   position: 'aboslute',
@@ -41,7 +42,6 @@ function App() {
   }, []);
 
   const signUp = (event) => {
-
   }
 
   return (
@@ -52,12 +52,14 @@ function App() {
       >
         <Box sx={style}>
           <div>
-            <center>
-              <img
-                className="app__header-image"
-                src="https://www.instagram.com/static/images/web/mobile_nav_type_logo-2x.png/1b47f9d0e595.png"
-                alt=""
-              />
+            <form className="signup-box">
+              <center>
+                <img
+                  className="box-header-image"
+                  src={spam}
+                  alt=""
+                />
+              </center>
               <Input
                 placeholder="text"
                 type="username"
@@ -76,10 +78,10 @@ function App() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
-
               <Button onClick={signUp}>Sign up</Button>
+            </form>
 
-            </center>
+
           </div>
           <Typography id="modal-modal-title" variant="h6" component="h2">
 
@@ -88,11 +90,12 @@ function App() {
             Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
           </Typography>
         </Box>
+
       </Modal>
       <div className="app__header">
         <img
           className="app__header-image"
-          src="https://www.instagram.com/static/images/web/mobile_nav_type_logo-2x.png/1b47f9d0e595.png"
+          src={spam}
           alt=""
         />
       </div>
