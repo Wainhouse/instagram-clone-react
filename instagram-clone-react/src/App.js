@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
 import Post from './Post.js';
-import { db } from './firebase';
+import { db, auth } from './firebase';
 import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
@@ -28,6 +28,30 @@ function App() {
   const [username, setUsername] = useState([]);
   const [email, setEmail] = useState([]);
   const [password, setPassword] = useState([]);
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    auth.onAuthStateChanged((authUser) => {
+      if (authUser) {
+        // user has logged in...
+        console.log(authUser);
+        setUser(authUser);
+
+        if (authUser.displayName) {
+          // don't update username
+        } else {
+          //if I just created someone
+          return authUser.updateProfile({
+            displayName: username,
+          });
+        }
+
+      } else {
+        //user has logged out...
+        setUser(null);
+      }
+    })
+  }, []);
 
   // useEffect -> Runs a piece of code based on a specific condition
   useEffect(() => {
@@ -42,6 +66,10 @@ function App() {
   }, []);
 
   const signUp = (event) => {
+    event.preventDefault();
+
+    auth.createUserWithEmailAndPassword(email, password)
+      .catch((error) => alert(error.message))
   }
 
   return (
@@ -61,7 +89,7 @@ function App() {
                 />
               </center>
               <Input
-                placeholder="text"
+                placeholder="username"
                 type="username"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
@@ -78,7 +106,7 @@ function App() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
-              <Button onClick={signUp}>Sign up</Button>
+              <Button type="submit" onClick={signUp}>Sign up</Button>
             </form>
 
 

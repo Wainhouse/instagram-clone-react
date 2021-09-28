@@ -28,3 +28,8 @@ margin: 0;
   direction: flex;
   flex-direction: column;
   }
+
+.signup-box {
+display: flex;
+flex-direction: column;
+}
