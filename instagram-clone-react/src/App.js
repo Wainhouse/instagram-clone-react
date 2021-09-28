@@ -13,7 +13,7 @@ const style = {
   position: 'aboslute',
   top: '100%',
   left: '100%',
-  transform: 'translate(+160%, +170%)',
+  transform: (20, 0),
   width: 400,
   bgcolor: 'background.paper',
   border: '1px solid lightgray',
