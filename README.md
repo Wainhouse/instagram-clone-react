@@ -1,6 +1,6 @@
 <h1>instagram-clone-react</h1>
 
-<h2First solo project.</h2>
+<h2>First solo project.</h2>
 
 <p>I'm independently learning ReactJS, Firebase and NodeJS alongside the QA Software Development Bootcamp.</p>
 
